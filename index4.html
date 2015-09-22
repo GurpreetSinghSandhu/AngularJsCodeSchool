@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html ng-app="myGem">
+<head>
+	<title>Fourth Page</title>
+	<script type="text/javascript" src="angular/angular.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="bootstrap/mycss.css" />
+	<script type="text/javascript" src="script/app.js"></script>
+	<script type="text/javascript" src="script/product.js"></script>
+</head>
+<body class="container" ng-controller="myGemStore as mgs" style="margin:0 auto">
+	
+	<header>
+
+      <h1 class="text-center">My Crafted Gems</h1>
+
+      <h2 class="text-center">- an Angular store -</h2>
+      
+    </header>
+
+	<div class="list-group">
+
+		<div class="list-group-item" ng-repeat="pp in mgs.products">
+			
+			<h3>
+				{{pp.name}}
+					<em class="pull-right">{{pp.price |currency}}</em>		
+			</h3>
+			
+			<product-gallery>
+			</product-gallery>
+			
+			<product-tabs >
+			</product-tabs>
+		</div>		
+	</div>
+</body>
+</html>

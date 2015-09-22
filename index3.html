@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html ng-app="myGem">
+<head>
+	<title>Third Page</title>
+	<script type="text/javascript" src="angular/angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="bootstrap/mycss.css" />
+	<script type="text/javascript" src="script/app.js"></script>
+</head>
+<body class="container" ng-controller="myGemStore as mgs" style="margin:0 auto">
+	
+	<header>
+      <h1 class="text-center">My Crafted Gems</h1>
+      <h2 class="text-center">- an Angular store -</h2>
+    </header>
+
+	<div class="list-group">
+
+		<div class="list-group-item" ng-repeat="pp in mgs.product">
+			
+			<h3>
+				{{pp.name}}
+					<em class="pull-right">{{pp.price |currency}}</em>		
+			</h3>
+			
+			<div class="gallery" ng-show="pp.images.length"	ng-controller="myGalleryController as myGallery">
+				<img ng-src={{pp.images[myGallery.current]}} />
+			</div>
+			
+			<ul class="img-thumbnails clearfix">
+				<li class="small-image pull-left thumbnail" ng-repeat="img in pp.images" style="width:50px;margin-top:20px">
+					<img ng-src={{img}} />
+				</li>
+				
+			</ul>
+			
+			<section class="tab" ng-controller="myTabController as tabs">
+				<ul class="nav nav-pills" >
+					<li ng-class="{ active:tabs.isSet(1)}">
+						<a href="" ng-click="tabs.setTab(1)">Description</a>
+					</li>
+					<li ng-class="{ active:tabs.isSet(2)}">
+						<a href="" ng-click="tabs.setTab(2)">Specs</a>
+					</li>
+					<li ng-class="{ active:tabs.isSet(3)}">
+						<a href="" ng-click="tabs.setTab(3)">Review</a>
+					</li>
+				</ul>
+				<div ng-show="tabs.isSet(1)">
+					<h4>Description</h4>
+					<blockquote>{{pp.description}}</blockquote>
+				</div>
+				<div ng-show="tabs.isSet(2)">
+					<h4>Spec</h4>
+					<blockquote>Shine: {{pp.shine}}</blockquote>
+				</div>
+				<div ng-show="tabs.isSet(3)">
+					<ul>
+						<h4>Review</h4>
+						<li ng-repeat="myrev in pp.reviews" style="list-style:none;">
+							<blockquote>
+								<strong>Stars: {{myrev.stars}}</strong>
+								{{myrev.body}}
+								<cite class="clearfix">-{{myrev.author}} on {{myrev.createdOn | date: 'MM/dd/yyyy'}}</cite>
+							</blockquote>
+						</li>
+					</ul>
+
+					<form name="reviewForm" ng-controller="myReviewController as myRevCon" ng-submit="reviewForm.$valid && myRevCon.addReview(pp)" novalidate>
+              			<blockquote>
+                			<strong>Stars: {{myRevCon.myrev.stars}}</strong>
+                				{{myRevCon.myrev.body}}
+                			<cite class="clearfix">-{{myRevCon.myrev.author}}</cite>
+              			</blockquote>
+
+						<h4>Submit Form</h4>
+						<fieldset class="form-group">
+							<select required ng-model="myRevCon.myrev.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]"  title="Stars">
+								<option value="">Rate the Product</option>
+							</select>
+						</fieldset>
+
+						<fieldset class="form-group">
+							<textarea required ng-model="myRevCon.myrev.body" class="form-control" placeholder="Write a short review of the product..." title="Reviews"></textarea>
+						</fieldset>
+
+						<fieldset class="form-group">
+                			<input required ng-model="myRevCon.myrev.author" type="email" class="form-control" placeholder="abc@example.org" title="Email" />
+              			</fieldset>
+
+              			<fieldset class="form-group">
+                			<input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+              			</fieldset>
+
+					</form>
+				</div>
+			</section>
+		</div>		
+	</div>
+</body>
+</html>

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html ng-app="myGem">
+<head>
+	<title>Third Page</title>
+	<script type="text/javascript" src="angular/angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.min.css" />
+	<script type="text/javascript" src="demo.js"></script>
+</head>
+<body class="container" ng-controller="myGemStore as mgs" style="margin:0 auto">
+	<div class="product row" ng-repeat="pp in mgs.product">
+		<h3>
+			{{pp.name}}
+		<em class="pull-right">
+			{{pp.price |currency}}	</em>		
+		</h3>
+		<button ng-show="pp.canPurchase">Add to cart</button>
+	</div>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>First page</title>
+	<script type="text/javascript" src="angular/angular.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="bootstrap/bootstrap.min.css" />
+</head>
+<body>
+	<div ng-app="myApp">
+		<div ng-controller="myAppStore"> 
+			<p>{{name.fs+" "+name.ls}}</p>
+			<p>{{1+2}}</p>
+			<p>{{2*4}}</p>
+			<p>{{8-10}}</p>
+			<p>{{25/5}}</p>
+			<p>{{10%8}}</p>
+			<p>Name <input type="text" ng-model="name.fs" value="" /></p>
+			<h1>Welcome <span ng-bind="name.fs"></span>!</h1>
+		</div>
+		<script src="script/script.js"></script>
+	</div>
+</body>
+</html>

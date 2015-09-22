@@ -1,0 +1,68 @@
+			<section class="tab">
+				<ul class="nav nav-pills" >
+					<li ng-class="{ active:tabs.isSet(1)}">
+						<a href="" ng-click="tabs.setTab(1)">Description</a>
+					</li>
+					<li ng-class="{ active:tabs.isSet(2)}">
+						<a href="" ng-click="tabs.setTab(2)">Specs</a>
+					</li>
+					<li ng-class="{ active:tabs.isSet(3)}">
+						<a href="" ng-click="tabs.setTab(3)">Review</a>
+					</li>
+				</ul>
+				
+				<!--<div ng-include="'product-description.html'" ng-show="tabs.isSet(1)">
+					
+				</div>-->
+				<product-description ng-show="tabs.isSet(1)">
+          		</product-description>
+          		
+          		<!-- <pdfile ng-show="tabs.isSet(1)">
+          		</pdfile> -->
+				
+
+				<div ng-show="tabs.isSet(2)" product-spec>
+					
+				</div>
+
+				<div ng-show="tabs.isSet(3)">
+					<ul>
+						<h4>Review</h4>
+						<li ng-repeat="myrev in pp.reviews" style="list-style:none;">
+							<blockquote>
+								<strong>Stars: {{myrev.stars}}</strong>
+								{{myrev.body}}
+								<cite class="clearfix">-{{myrev.author}} on {{myrev.createdOn | date: 'MM/dd/yyyy'}}</cite>
+							</blockquote>
+						</li>
+					</ul>
+
+					<form name="reviewForm" ng-controller="myReviewController as myRevCon" ng-submit="reviewForm.$valid && myRevCon.addReview(pp)" novalidate>
+              			<blockquote>
+                			<strong>Stars: {{myRevCon.myrev.stars}}</strong>
+                				{{myRevCon.myrev.body}}
+                			<cite class="clearfix">-{{myRevCon.myrev.author}}</cite>
+              			</blockquote>
+
+						<h4>Submit Form</h4>
+						<fieldset class="form-group">
+							<select required ng-model="myRevCon.myrev.stars" class="form-control" ng-options="stars for stars in [5,4,3,2,1]"  title="Stars">
+								<option value="">Rate the Product</option>
+							</select>
+						</fieldset>
+
+						<fieldset class="form-group">
+							<textarea required ng-model="myRevCon.myrev.body" class="form-control" placeholder="Write a short review of the product..." title="Reviews"></textarea>
+						</fieldset>
+
+						<fieldset class="form-group">
+                			<input required ng-model="myRevCon.myrev.author" type="email" class="form-control" placeholder="abc@example.org" title="Email" />
+              			</fieldset>
+
+              			<fieldset class="form-group">
+                			<input type="submit" class="btn btn-primary pull-right" value="Submit Review" />
+              			</fieldset>
+
+					</form>
+				</div>
+			</section>

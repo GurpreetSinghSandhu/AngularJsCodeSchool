@@ -1,0 +1,12 @@
+<div class="gallery" ng-show="pp.images.length"	>
+				<div class="img-wrap">
+					<img ng-src={{pp.images[myGallery.current]}} />
+				</div>
+			
+				<ul class="img-thumbnails clearfix">
+					<li class="small-image pull-left thumbnail" ng-repeat="img in pp.images" style="width:50px;margin-top:20px">
+						<img ng-src={{img}} />
+					</li>
+				
+				</ul>
+			</div>
